@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            background: #020202;
+            overflow-x: hidden;
+        }
+
+        .header {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                filter: brightness(50%);
+            }
+        }
+
+        .header__text {
+            position: absolute;
+            color: white;
+            z-index: 1;
+            margin: 40vh 5vh;
+            font-size: 5vh;
+            width: 50%;
+        }
+
+        .main__block {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main__text {
+            text-align: center;
+            padding-top: 5vh;
+            font-size: 5vh;
+            color: white;
+
+            &:nth-child(2) {
+                font-size: 3vh;
+                padding-top: 3vh;
+            }
+        }
+
+        .main {
+            img {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                object-fit: cover;
+                filter: brightness(15%);
+            }
+        }
+
+        .main__row {
+            width: 60%;
+            font-size: 2.5vh;
+            color: white;
+            margin-top: 5vh;
+            padding: 2vh;
+
+            div {
+                margin-bottom: 1vh;
+                font-size: 3vh;
+                font-weight: 500;
+            }
+        }
+
+        .left {
+            float: left;
+            margin-left: 1vh;
+        }
+
+        .right {
+            float: right;
+            margin-right: 1vh;
+            text-align: right;
+        }
+
+        .main__slider {
+            width: 10000vh;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+
+            img {
+                filter: brightness(100%);
+            }
+        }
+
+        .slider__sub {
+            display: flex;
+            position: absolute;
+            left: 0;
+            transition: .2s;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .main__slider__item {
+            width: 200vh;
+            position: relative;
+            height: 100%;
+
+            img {
+                position: absolute;
+                width: 100%;
+                height: 100vh;
+                object-fit: cover;
+                filter: brightness(50%);
+            }
+        }
+
+        .slider__text {
+            color: white;
+            z-index: 1;
+            margin: 30vh 5%;
+            font-size: 4vh;
+            position: relative;
+            width: 50%;
+        }
+
+        .main__slider_text {
+            text-align: center;
+            font-size: 4vh;
+            position: relative;
+            z-index: 1;
+            margin-top: 5vh;
+            color: white;
+            font-weight: 500;
+        }
+
+        .slider__timer {
+            width: 100%;
+            height: .7vh;
+            background: #2e2633;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .slider__time {
+            background: #3fb8af;
+            border-radius: 0 1vh 1vh 0;
+            width: 0;
+            height: 100%;
+            transition: .2s all ease-out;
+        }
+
+        .main__block_flex {
+            display: flex;
+            justify-content: center;
+            margin-top: 4vh;
+            gap: 2vh;
+        }
+
+        .flex__block {
+            width: 30%;
+            color: white;
+            text-align: center;
+            padding: 3vh;
+            background: rgb(33, 33, 33, .8);
+            backdrop-filter: blur(-25px) saturate(100%) contrast(100%);
+            -webkit-box-shadow: 0px 0px 16px 11px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0px 0px 16px 11px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 0px 16px 11px rgba(0, 0, 0, 0.2);
+        }
+
+        .flex__block_name {
+            font-size: 3vh;
+            font-weight: 500;
+            margin-bottom: 2vh;
+        }
+
+        .flex__block_title {
+            font-size: 1.9vh;
+            text-align: left;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 2000px) {
+            .main__block_flex {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .flex__block {
+                width: 90%;
+                margin-bottom: 2vh;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .main__block_flex {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main__slider {
+                display: none;
+            }
+
+            .flex__block {
+                width: 90%;
+                margin-bottom: 2vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header__text {
+                margin: 20vh 5vh;
+                font-size: 3.5vh;
+                width: 90%;
+            }
+
+            .main__text {
+                font-size: 3.5vh;
+            }
+
+            .main__row {
+                width: 90%;
+                font-size: 2vh;
+
+                div {
+                    font-size: 2.5vh;
+                }
+            }
+
+            .left, .right {
+                float: none;
+                margin: 2vh auto;
+                text-align: center;
+            }
+
+            .main__slider__item {
+                width: 100vw;
+            }
+
+            .slider__text, .main__slider_text {
+                font-size: 3vh;
+                margin: 20vh 5vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header__text {
+                margin: 45vh 5vh;
+                font-size: 2.5vh;
+            }
+
+            .main__text {
+                font-size: 2.5vh;
+            }
+
+            .main__row {
+                font-size: 1.8vh;
+
+                div {
+                    font-size: 2vh;
+                }
+            }
+
+            .flex__block_name {
+                font-size: 2.5vh;
+            }
+
+            .flex__block_title {
+                font-size: 1.5vh;
+            }
+
+            .slider__text, .main__slider_text {
+                font-size: 2.5vh;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2vh;
+            color: white;
+            font-size: 3vh;
+            background: #131416;
+        }
+
+        .footer__flex {
+            display: flex;
+            justify-content: center;
+            margin-top: 3vh;
+            gap: 5vh;
+        }
+
+        .main__slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 100vh; /* Начальная высота, можно настроить под ваши нужды */
+        }
+
+        .slider__sub {
+            display: flex;
+            position: absolute;
+            left: 0;
+            transition: .2s;
+            width: 600%; /* Здесь можно настроить ширину под количество слайдов */
+            height: 100%;
+        }
+
+        .main__slider__item {
+            width: 16.666%; /* Рассчитываем ширину одного слайда в процентах */
+            position: relative;
+            height: 100%;
+        }
+
+        .slider__text {
+            color: white;
+            z-index: 1;
+            margin: 30vh 5%;
+            font-size: 4vh;
+            position: relative;
+            width: 50%;
+        }
+
+        .main__slider_text {
+            text-align: center;
+            font-size: 4vh;
+            position: relative;
+            z-index: 1;
+            margin-top: 5vh;
+            color: white;
+            font-weight: 500;
+        }
+
+        .slider__timer {
+            width: 100%;
+            height: .7vh;
+            background: #2e2633;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .slider__time {
+            background: #3fb8af;
+            border-radius: 0 1vh 1vh 0;
+            width: 0;
+            height: 100%;
+            transition: .2s all ease-out;
+        }
+    </style>
+    <title>Нанокристаллы: революция в новых технологиях</title>
+</head>
+<body>
+<div class="header">
+    <div class="header__text">
+        Нанокристаллы - крошечные кристаллы с уникальными свойствами.
+    </div>
+    <img src="./img/Без названия.jpg" alt="">
+</div>
+<div class="main">
+    <img src="./img/000029_1523048622_297643_big.jpg" alt="">
+    <div class="main__block">
+        <div class="main__text">Тепловые свойства нанокристаллов</div>
+        <div class="main__row left">
+            <div>Высокая теплоемкость</div>
+            Из-за большого количества поверхности по сравнению с объемом нанокристаллы обладают более высокой
+            теплоемкостью
+            по сравнению с макроскопическими твердыми телами.
+        </div>
+        <div class="main__row right">
+            <div>Повышенная теплопроводность</div>
+            В некоторых случаях нанокристаллические материалы могут обладать улучшенными теплопроводными свойствами по
+            сравнению с их макроскопическими аналогами.
+        </div>
+        <div class="main__row left">
+            <div>Мелтинговая температура</div>
+            Нанокристаллы могут иметь более низкую температуру плавления, чем их макроскопические аналоги из-за
+            поверхностного эффекта.
+        </div>
+        <div class="main__row right">
+            <div>Фазовые переходы</div>
+            Размеры нанокристаллов могут влиять на их способность к фазовым переходам,поведение при нагревании и
+            кристаллографические изменения.
+        </div>
+    </div>
+    <div class="main__slider">
+        <div class="slider__sub">
+            <div class="main__slider__item">
+                <img src="./img/still-life-laboratory-samples.jpg" alt="">
+                <div class="main__slider_text">Сфера использования нанокристаллов:Катализ</div>
+                <div class="slider__text">
+                    <div>Нанокристаллы могут использоваться в качестве катализаторов в химических реакциях благодаря
+                        своей
+                        большой поверхности и высокой активности.
+                    </div>
+                </div>
+            </div>
+            <div class="main__slider__item">
+                <img style=" transform: scaleX(-1);" src="./img/default-10zv.png" alt="">
+                <div class="main__slider_text">Сфера использования нанокристаллов:Электроника и оптоэлектроника</div>
+                <div style="float: right" class="slider__text">
+                    <div>Нанокристаллы широко применяются в электронике, например, в качестве квантовых точек для
+                        создания
+                        светодиодов, солнечных элементов и других устройств.
+                    </div>
+                </div>
+            </div>
+            <div class="main__slider__item">
+                <img src="./img/1625709850_33-kartinkin-com-p-meditsina-oboi-krasivie-34.jpg" alt="">
+                <div class="main__slider_text">Сфера использования нанокристаллов:Медицина</div>
+                <div class="slider__text">
+                    <div> В медицине нанокристаллы используются в качестве меток для отслеживания и визуализации клеток,
+                        лекарственных препаратов и диагностических средств.
+                    </div>
+                </div>
+            </div>
+            <div class="main__slider__item">
+                <img style=" transform: scaleX(-1);" src="./img/solar-photovoltaic.jpg" alt="">
+                <div class="main__slider_text">Сфера использования нанокристаллов:Энергетика</div>
+                <div style="float: right" class="slider__text">
+                    <div>Нанокристаллы применяются в разработке новых материалов для высокоэффективных солнечных
+                        батарей,
+                        литий-ионных аккумуляторов и других устройств хранения энергии.
+                    </div>
+                </div>
+            </div>
+            <div class="main__slider__item">
+                <img src="./img/ea53e2ba.main_out_rus_metal_industry_2022.jpg" alt="">
+                <div class="main__slider_text">Сфера использования нанокристаллов:Материаловедение и металлургия</div>
+                <div class="slider__text">
+                    <div>Нанокристаллы могут улучшать механические и термические свойства материалов, что делает их
+                        привлекательными для использования в композитных материалах.
+                    </div>
+                </div>
+            </div>
+            <div class="main__slider__item">
+                <img src="./img/materialy-dlya-utepleniya-sten-iznutri-1220x640.jpg" alt="">
+                <div class="main__slider_text">Сфера использования нанокристаллов:Теплоизоляция и теплоотвод</div>
+                <div style="float: right" class="slider__text">
+                    <div> Нанокристаллы могут использоваться для создания ультратонких и высокоэффективных
+                        теплоизоляционных
+                        материалов и теплопроводящих компонентов.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider__timer">
+            <div class="slider__time"></div>
+        </div>
+    </div>
+    <div style="height: auto;padding-bottom:5vh" class="main__block">
+        <img style="position: absolute" src="./img/71b1fd482ef8cbecd454b933cd71b039.png" alt="">
+        <div style="position: relative;z-index: 1">
+            <div class="main__text">Передовые сферы использования тепловых свойств нанокристаллов</div>
+            <div class="main__block_flex">
+                <div style="border-radius:2vh 0 0 2vh" class="flex__block">
+                    <div class="flex__block_name">Тепловые интерфейсы</div>
+                    <div class="flex__block_title">Нанокристаллы могут быть использованы в составе тепловых интерфейсов,
+                        которые
+                        применяются для улучшения передачи тепла между различными материалами, такими как
+                        микропроцессоры,
+                        радиаторы или другие тепловые устройства. Их высокая теплопроводность и способность образовывать
+                        плотные
+                        контактные поверхности способствуют более эффективному рассеиванию тепла, что является
+                        критически важным
+                        для предотвращения перегрева и увеличения производительности электронных устройств. Кроме того,
+                        нанокристаллы могут быть использованы в составе термопаст и термопрокладок, что способствует их
+                        применению
+                        в высокотехнологичных областях, таких как аэрокосмическая промышленность и электроника.
+                    </div>
+                </div>
+                <div class="flex__block">
+                    <div class="flex__block_name">Оптика</div>
+                    <div style="text-align:center" class="flex__block_title">В оптике нанокристаллы находят применение в
+                        фотолюминесцентных материалах, квантовых точках и лазерах для улучшения источников света и
+                        дисплеев.
+                        Квантовые точки, обладая уникальными оптическими свойствами, могут излучать свет с высокой
+                        яркостью и
+                        чистотой цвета, что делает их идеальными для использования в светодиодах, экранах и дисплеях. В
+                        лазерных
+                        технологиях нанокристаллы позволяют создавать более мощные и стабильные источники света. Также
+                        они находят
+                        применение в солнечных концентраторах, увеличивая эффективность преобразования солнечного света
+                        в
+                        электрическую энергию. Нанокристаллы используются в разработке новых типов линз и оптических
+                        фильтров, что
+                        способствует улучшению качества изображения в микроскопах, камерах и других оптических приборах.
+                        Их
+                        способность изменять свои оптические свойства под воздействием электрического поля делает их
+                        перспективными для использования в технологии дисплеев следующего поколения, таких как гибкие и
+                        прозрачные
+                        экраны.
+                    </div>
+                </div>
+                <div style="border-radius:0 2vh 2vh 0" class="flex__block">
+                    <div class="flex__block_name">Нанотехнологии</div>
+                    <div style="text-align:right" class="flex__block_title">Нанокристаллы играют важную роль в развитии
+                        нанотехнологий, обеспечивая значительные улучшения в различных областях. Они повышают
+                        эффективность
+                        солнечных элементов за счет увеличения поглощения солнечного света и улучшения процесса
+                        преобразования его
+                        в электрическую энергию. В фотокатализаторах нанокристаллы используются для очистки воды и
+                        воздуха,
+                        эффективно разлагая органические загрязнители под воздействием света. В биосенсорах
+                        нанокристаллы
+                        позволяют создавать высокочувствительные устройства для точного обнаружения биомолекул, что
+                        важно для
+                        ранней диагностики заболеваний. В медицинских технологиях нанокристаллы используются для
+                        целенаправленной
+                        доставки лекарств и улучшения визуализации клеток и тканей. В электронике нанокристаллы
+                        применяются для
+                        разработки новых типов полупроводников и транзисторов, способных работать быстрее и с меньшим
+                        энергопотреблением.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    При поиске информации использовались:
+    <div class="footer__flex">
+        <div>ChatGPT</div>
+        <div>MidJourney</div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var sliderNumber = 0;
+        var sliderTime = 0;
+        var intervalId = setInterval(function () {
+            sliderTime += 1;
+            if (sliderTime >= 6) {
+                sliderNumber += 1;
+                sliderTime = 0;
+                if (sliderNumber >= 6) {
+                    var slider = document.querySelector('.slider__sub');
+                    slider.style.transition = 'none';
+                    slider.style.left = '0';
+                    setTimeout(function () {
+                        slider.style.transition = '';
+                    });
+                    sliderNumber = 0;
+                }
+            }
+            var slider = document.querySelector('.slider__sub');
+            slider.style.left = (-sliderNumber * 100) + '%';
+
+            // Установка ширины шкалы прогресса в зависимости от sliderTime
+            var sliderTimeElement = document.querySelector('.slider__time');
+            sliderTimeElement.style.width = (sliderTime * 35) + 'vh'; // Умножаем на 40 и добавляем 'vh'
+        }, 1000);
+    });
+
+</script>
+
+</body>
+</html>
